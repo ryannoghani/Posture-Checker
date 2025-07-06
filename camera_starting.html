@@ -1,0 +1,174 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Display Webcam Stream</title>
+ 
+<style>
+#container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+#videoElement {
+	width: 500px;
+	height: 375px;
+	background-color: #666;
+}
+</style>
+</head>
+ 
+<body>
+    <div id="container">
+        <video autoplay="true" id="videoElement"></video>
+    </div>
+
+
+
+    <script>
+
+
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+        let but = document.getElementById("but");
+        let video = document.getElementById("vid");
+        let mediaDevices = navigator.mediaDevices;
+        vid.muted = true;
+        but.addEventListener("click", () => {
+
+            // Accessing the user camera and video.
+            mediaDevices
+                .getUserMedia({
+                    video: true,
+                    audio: true,
+                })
+                .then((stream) => {
+                    // Changing the source of video to current stream.
+                    video.srcObject = stream;
+                    video.addEventListener("loadedmetadata", () => {
+                        video.play();
+                    });
+                })
+                .catch(alert);
+        });
+    });
+
+
+
+
+    
+    
+
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- The head just has some info on how to customize the way this page looks -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div {
+            width: 500px;
+            height: 400px;
+            border: 2px solid black;
+            position: relative;
+        }
+
+        video {
+            width: 500px;
+            height: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <video id="vid"></video> <!-- This is what chooses the location of the video camera -->
+    </div>
+    <br />
+    <button id="but" autoplay> <!-- The button that says "open webcam" -->
+        Open WebCam
+    </button>
+
+
+
+    <h2 id="seconds"></h2>
+
+
+
+    
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let but = document.getElementById("but"); // This is saying to let the variable but be associated with the button but
+        let video = document.getElementById("vid"); // This is saying to let the variable video to be associated with vid element
+        let mediaDevices = navigator.mediaDevices; // I'm not really sure what this does. Maybe it initializes something
+        vid.muted = true;
+        but.addEventListener("click", () => {   // Whan button is clicked this is what happens
+
+            // Accessing the user camera and video.
+            mediaDevices
+                .getUserMedia({
+                    video: true,
+                    audio: false,   // We dont need audio info
+                })
+                .then((stream) => {
+                    // Changing the source of video to current stream.
+                    video.srcObject = stream; // The source of the video is coming from your camera
+                    video.addEventListener("loadedmetadata", () => {
+                        const status = video.play();
+                    });
+
+                    const Seconds = document.getElementById('seconds');                    
+                    var seconds = 5;
+                    Seconds.innerHTML = 5;
+
+                    function timer () {
+                        if (seconds > 0) {
+                            seconds--;
+                            Seconds.innerHTML = seconds;
+                        }
+
+                        else {
+                            Seconds.innerHTML = "";
+                            // window.location.href = 'start.html';
+                        }
+
+                    }
+                    setInterval(timer, 1000);
+                })
+                .catch(alert);
+            
+            
+            
+
+            
+            
+            
+        });
+    });
+</script>
+
+</html>
